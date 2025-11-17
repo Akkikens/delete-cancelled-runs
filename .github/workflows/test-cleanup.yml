@@ -29,9 +29,16 @@ jobs:
       actions: write
     steps:
       - name: Test cleanup with dry-run
-        uses: ./
+        uses: Akkikens/delete-cancelled-runs@main
         with:
           workflow-file: 'test-cleanup.yml'
           max-deletions: '10'
           dry-run: 'true'
+      
+      - name: Test cleanup (actual deletion)
+        uses: Akkikens/delete-cancelled-runs@main
+        with:
+          workflow-file: 'test-cleanup.yml'
+          max-deletions: '10'
+          dry-run: 'false'
 
