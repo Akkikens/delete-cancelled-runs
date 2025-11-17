@@ -28,15 +28,18 @@ jobs:
     permissions:
       actions: write
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
       - name: Test cleanup with dry-run
-        uses: Akkikens/delete-cancelled-runs@main
+        uses: ./
         with:
           workflow-file: 'test-cleanup.yml'
           max-deletions: '10'
           dry-run: 'true'
       
       - name: Test cleanup (actual deletion)
-        uses: Akkikens/delete-cancelled-runs@main
+        uses: ./
         with:
           workflow-file: 'test-cleanup.yml'
           max-deletions: '10'
